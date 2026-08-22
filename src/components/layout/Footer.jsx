@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 
-const rbLogo = "https://raw.githubusercontent.com/Shahzadkhanks19/rbcorp-react/main/src/Components/Footer/Images/Rb%20corp%20for%20coding%20(3).png";
-
 const companies = [
   ["Beyonist", "/companies/beyonist"],
   ["RB Service Connect", "/companies/rb-service-connect"],
@@ -12,46 +10,50 @@ const companies = [
 
 function Footer() {
   return (
-    <footer className="bg-[#06172f] text-white">
-      <div className="mx-auto max-w-[1600px] px-5 py-16 sm:px-8 lg:px-14 lg:py-20">
-        <div className="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-[1.4fr_.8fr_.8fr]">
+    <footer className="bg-[#04142b] text-white">
+      <div className="mx-auto max-w-[1680px] px-5 py-16 sm:px-8 lg:px-12 xl:px-16 lg:py-20">
+        <div className="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-[1.35fr_.75fr_.75fr_.75fr]">
           <div>
             <div className="flex items-center gap-4">
-              <span className="grid h-16 w-24 place-items-center overflow-hidden rounded-xl bg-white p-2">
-                <img src={rbLogo} alt="Royalties Beauty Corp" className="max-h-12 max-w-20 object-contain" />
-              </span>
+              <img src="/rb-corp-logo.svg" alt="RB Corp" className="h-20 w-28 rounded-sm bg-white p-2 object-contain" />
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.2em]">Royalties Beauty Corp</p>
-                <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-blue-200/70">Diversified enterprise group</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em]">Royalties Beauty Corp</p>
+                <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.22em] text-[#d5aa59]">Diversified enterprise group</p>
               </div>
             </div>
-            <p className="mt-6 max-w-xl text-sm leading-7 text-white/52">
-              Building and growing businesses across beauty, services, finance, hospitality and social impact with a long-term commitment to trust, quality and responsible growth.
+            <p className="mt-7 max-w-xl text-sm leading-7 text-white/52">
+              Building and growing responsible businesses across beauty, services, finance, hospitality and social impact with a long-term commitment to trust, quality and sustainable value.
             </p>
           </div>
 
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-200">Businesses</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#d5aa59]">Businesses</p>
             <div className="mt-5 grid gap-3 text-sm text-white/58">
-              {companies.map(([label, to]) => (
-                <Link key={to} to={to} className="transition hover:text-white">{label}</Link>
-              ))}
+              {companies.map(([label, to]) => <Link key={to} to={to} className="transition hover:text-white">{label}</Link>)}
             </div>
           </div>
 
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-200">Corporate</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#d5aa59]">Corporate</p>
             <div className="mt-5 grid gap-3 text-sm text-white/58">
               <Link to="/about" className="transition hover:text-white">About RB Corp</Link>
               <Link to="/impact" className="transition hover:text-white">Impact</Link>
               <Link to="/insights" className="transition hover:text-white">Insights</Link>
               <Link to="/careers" className="transition hover:text-white">Careers</Link>
-              <Link to="/contact" className="transition hover:text-white">Contact</Link>
+            </div>
+          </div>
+
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#d5aa59]">Connect</p>
+            <div className="mt-5 grid gap-3 text-sm text-white/58">
+              <Link to="/contact" className="transition hover:text-white">Contact us</Link>
+              <Link to="/companies" className="transition hover:text-white">Our businesses</Link>
+              <Link to="/" className="transition hover:text-white">Home</Link>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 pt-6 text-xs text-white/35 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 pt-6 text-xs text-white/34 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Royalties Beauty Corp. All rights reserved.</p>
           <p className="uppercase tracking-[0.18em]">Trust · Enterprise · Impact</p>
         </div>

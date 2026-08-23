@@ -3,6 +3,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import { connectDatabase } from "./config/db.js";
+import { clearSessionCookie, createSessionToken, credentialsAreValid, requireAdmin, sessionCookie } from "./lib/adminAuth.js";
 import ContactInquiry from "./models/ContactInquiry.js";
 
 const app = express();
@@ -63,29 +64,12 @@ app.post("/api/contact", async (req, res) => {
   const message = String(req.body?.message || "").trim();
   const allowedInquiryTypes = ["Group inquiry", "Partnership", "Media & insights", "Business opportunity", "Other"];
 
-  if (name.length < 2 || name.length > 80) {
-    return res.status(400).json({ ok: false, message: "Please enter a valid name." });
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 160) {
-    return res.status(400).json({ ok: false, message: "Please enter a valid email address." });
-  }
-
-  if (phone.length > 30 || organization.length > 120) {
-    return res.status(400).json({ ok: false, message: "One or more fields are too long." });
-  }
-
-  if (!allowedInquiryTypes.includes(inquiryType)) {
-    return res.status(400).json({ ok: false, message: "Please choose a valid inquiry type." });
-  }
-
-  if (message.length < 10 || message.length > 3000) {
-    return res.status(400).json({ ok: false, message: "Please enter a message between 10 and 3000 characters." });
-  }
-
-  if (!process.env.MONGODB_URI) {
-    return res.status(503).json({ ok: false, message: "Contact submissions are not configured yet." });
-  }
+  if (name.length < 2 || name.length > 80) return res.status(400).json({ ok: false, message: "Please enter a valid name." });
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 160) return res.status(400).json({ ok: false, message: "Please enter a valid email address." });
+  if (phone.length > 30 || organization.length > 120) return res.status(400).json({ ok: false, message: "One or more fields are too long." });
+  if (!allowedInquiryTypes.includes(inquiryType)) return res.status(400).json({ ok: false, message: "Please choose a valid inquiry type." });
+  if (message.length < 10 || message.length > 3000) return res.status(400).json({ ok: false, message: "Please enter a message between 10 and 3000 characters." });
+  if (!process.env.MONGODB_URI) return res.status(503).json({ ok: false, message: "Contact submissions are not configured yet." });
 
   try {
     await connectDatabase();
@@ -94,6 +78,77 @@ app.post("/api/contact", async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ ok: false, message: "We could not submit your inquiry right now." });
+  }
+});
+
+app.post("/api/admin/login", (req, res) => {
+  try {
+    if (!credentialsAreValid(req.body?.email, req.body?.password)) {
+      return res.status(401).json({ ok: false, message: "Invalid admin credentials." });
+    }
+    res.setHeader("Set-Cookie", sessionCookie(createSessionToken()));
+    return res.status(200).json({ ok: true, admin: { email: String(process.env.ADMIN_EMAIL || "").trim().toLowerCase() } });
+  } catch (error) {
+    console.error(error);
+    return res.status(503).json({ ok: false, message: "Admin authentication is not configured." });
+  }
+});
+
+app.post("/api/admin/logout", (_req, res) => {
+  res.setHeader("Set-Cookie", clearSessionCookie());
+  return res.status(200).json({ ok: true });
+});
+
+app.get("/api/admin/me", requireAdmin, (_req, res) => {
+  return res.status(200).json({ ok: true, admin: { email: String(process.env.ADMIN_EMAIL || "").trim().toLowerCase() } });
+});
+
+app.get("/api/admin/contact-inquiries", requireAdmin, async (req, res) => {
+  if (!process.env.MONGODB_URI) return res.status(503).json({ ok: false, message: "Database is not configured." });
+  try {
+    await connectDatabase();
+    const status = String(req.query.status || "all");
+    const search = String(req.query.search || "").trim();
+    const filter = {};
+    if (["new", "read", "replied"].includes(status)) filter.status = status;
+    if (search) {
+      const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      filter.$or = ["name", "email", "organization", "inquiryType", "message"].map((field) => ({ [field]: { $regex: escaped, $options: "i" } }));
+    }
+    const [items, newCount] = await Promise.all([
+      ContactInquiry.find(filter).sort({ createdAt: -1 }).lean(),
+      ContactInquiry.countDocuments({ status: "new" }),
+    ]);
+    return res.status(200).json({ ok: true, items, newCount });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ ok: false, message: "Unable to load contact inquiries." });
+  }
+});
+
+app.patch("/api/admin/contact-inquiries/:id", requireAdmin, async (req, res) => {
+  const status = String(req.body?.status || "");
+  if (!["new", "read", "replied"].includes(status)) return res.status(400).json({ ok: false, message: "Invalid inquiry status." });
+  try {
+    await connectDatabase();
+    const item = await ContactInquiry.findByIdAndUpdate(req.params.id, { status }, { new: true, runValidators: true }).lean();
+    if (!item) return res.status(404).json({ ok: false, message: "Inquiry not found." });
+    return res.status(200).json({ ok: true, item });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ ok: false, message: "Unable to update the inquiry." });
+  }
+});
+
+app.delete("/api/admin/contact-inquiries/:id", requireAdmin, async (req, res) => {
+  try {
+    await connectDatabase();
+    const item = await ContactInquiry.findByIdAndDelete(req.params.id).lean();
+    if (!item) return res.status(404).json({ ok: false, message: "Inquiry not found." });
+    return res.status(200).json({ ok: true });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ ok: false, message: "Unable to delete the inquiry." });
   }
 });
 

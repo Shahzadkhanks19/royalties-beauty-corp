@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 function SiteLayout() {
   return (
-    <div className="min-h-screen bg-[var(--rb-bg)] text-[var(--rb-text)]">
+    <div className="min-h-screen bg-[#f7f4f0] text-[#151517]">
       <Navbar />
       <main>
         <Outlet />

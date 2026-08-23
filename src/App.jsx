@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import SiteLayout from "./components/layout/SiteLayout";
 import AboutPage from "./pages/AboutPage";
+import BusinessesPage from "./pages/BusinessesPage";
 import HomePage from "./pages/HomePage";
 import PlaceholderPage from "./pages/PlaceholderPage";
 
@@ -10,7 +11,7 @@ function App() {
       <Route element={<SiteLayout />}>
         <Route index element={<HomePage />} />
         <Route path="about" element={<AboutPage />} />
-        <Route path="companies" element={<PlaceholderPage title="Our Companies" />} />
+        <Route path="companies" element={<BusinessesPage />} />
         <Route path="companies/beyonist" element={<PlaceholderPage title="Beyonist" />} />
         <Route path="companies/rb-service-connect" element={<PlaceholderPage title="RB Service Connect" />} />
         <Route path="companies/rb-finance" element={<PlaceholderPage title="RB Finance" />} />

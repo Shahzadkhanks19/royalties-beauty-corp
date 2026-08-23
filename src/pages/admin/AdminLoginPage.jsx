@@ -9,6 +9,7 @@ function AdminLoginPage() {
   const [submitting, setSubmitting] = useState(false);
   const [checking, setChecking] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -75,7 +76,16 @@ function AdminLoginPage() {
           <h2 className="mt-4 font-serif text-3xl">Welcome back.</h2>
           <div className="mt-7 space-y-4">
             <label className="block"><span className="mb-2 block text-[10px] font-bold uppercase tracking-[.15em] text-white/45">Email</span><input value={form.email} onChange={(e)=>setForm((current)=>({...current,email:e.target.value}))} className={inputClass} placeholder="admin@example.com" inputMode="email" autoComplete="username" /></label>
-            <label className="block"><span className="mb-2 block text-[10px] font-bold uppercase tracking-[.15em] text-white/45">Password</span><input value={form.password} onChange={(e)=>setForm((current)=>({...current,password:e.target.value}))} className={inputClass} placeholder="Enter password" type="password" autoComplete="current-password" /></label>
+            <label className="block">
+              <span className="mb-2 block text-[10px] font-bold uppercase tracking-[.15em] text-white/45">Password</span>
+              <span className="relative block">
+                <input value={form.password} onChange={(e)=>setForm((current)=>({...current,password:e.target.value}))} className={`${inputClass} pr-28`} placeholder="Enter password" type={showPassword ? "text" : "password"} autoComplete="current-password" />
+                <button type="button" onClick={()=>setShowPassword((current)=>!current)} aria-pressed={showPassword} aria-label={showPassword ? "Hide password" : "Show password"} className="absolute inset-y-0 right-0 flex items-center gap-2 px-4 text-[10px] font-bold uppercase tracking-[.12em] text-white/55 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff4d50]">
+                  <span aria-hidden="true" className="text-sm leading-none">{showPassword ? "◉" : "◎"}</span>
+                  <span>{showPassword ? "Hide" : "Show"}</span>
+                </button>
+              </span>
+            </label>
           </div>
           {status.message && <div className="mt-5 border border-red-400/25 bg-red-500/10 px-4 py-3 text-sm text-red-100" role="status">{status.message}</div>}
           <button disabled={submitting} className="mt-6 flex w-full items-center justify-center gap-3 bg-[#ff4d50] px-6 py-4 text-sm font-bold uppercase tracking-[.08em] transition hover:-translate-y-0.5 hover:bg-[#e83c40] disabled:cursor-not-allowed disabled:opacity-55">{submitting?"Signing in...":"Sign in"}<span>→</span></button>

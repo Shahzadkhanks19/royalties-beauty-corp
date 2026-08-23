@@ -1,0 +1,1 @@
+Use rb-corp-red.png for navbar/footer. Favicon files are served from /brand/.

@@ -23,24 +23,12 @@ export default defineConfig({
             {
               name: "react-vendor",
               test: /node_modules[\\/](react|react-dom)[\\/]/,
-              priority: 40,
+              priority: 20,
             },
             {
               name: "router-vendor",
               test: /node_modules[\\/]react-router(?:-dom)?[\\/]/,
-              priority: 30,
-            },
-            {
-              name: "motion-vendor",
-              test: /node_modules[\\/](motion|framer-motion)[\\/]/,
-              priority: 20,
-              maxSize: 300000,
-            },
-            {
-              name: "vendor",
-              test: /node_modules/,
               priority: 10,
-              maxSize: 300000,
             },
           ],
         },

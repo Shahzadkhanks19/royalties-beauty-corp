@@ -8,6 +8,7 @@ import PlaceholderPage from "./pages/PlaceholderPage";
 import RBCharityFoundationPage from "./pages/RBCharityFoundationPage";
 import RBFinancePage from "./pages/RBFinancePage";
 import RBServiceConnectPage from "./pages/RBServiceConnectPage";
+import RoyaltiesBuffetPage from "./pages/RoyaltiesBuffetPage";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <Route path="companies/rb-service-connect" element={<RBServiceConnectPage />} />
         <Route path="companies/rb-finance" element={<RBFinancePage />} />
         <Route path="companies/royalties-charity" element={<RBCharityFoundationPage />} />
-        <Route path="companies/royalties-buffet" element={<PlaceholderPage title="Royalties Buffet" />} />
+        <Route path="companies/royalties-buffet" element={<RoyaltiesBuffetPage />} />
         <Route path="impact" element={<PlaceholderPage title="Impact" />} />
         <Route path="insights" element={<PlaceholderPage title="Insights" />} />
         <Route path="contact" element={<PlaceholderPage title="Contact" />} />

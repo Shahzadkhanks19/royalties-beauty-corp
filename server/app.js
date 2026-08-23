@@ -3,6 +3,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import { connectDatabase } from "./config/db.js";
+import ContactInquiry from "./models/ContactInquiry.js";
 
 const app = express();
 
@@ -51,6 +52,49 @@ app.get("/api/health", async (_req, res) => {
   }
 
   return res.status(200).json(response);
+});
+
+app.post("/api/contact", async (req, res) => {
+  const name = String(req.body?.name || "").trim();
+  const email = String(req.body?.email || "").trim().toLowerCase();
+  const phone = String(req.body?.phone || "").trim();
+  const organization = String(req.body?.organization || "").trim();
+  const inquiryType = String(req.body?.inquiryType || "").trim();
+  const message = String(req.body?.message || "").trim();
+  const allowedInquiryTypes = ["Group inquiry", "Partnership", "Media & insights", "Business opportunity", "Other"];
+
+  if (name.length < 2 || name.length > 80) {
+    return res.status(400).json({ ok: false, message: "Please enter a valid name." });
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 160) {
+    return res.status(400).json({ ok: false, message: "Please enter a valid email address." });
+  }
+
+  if (phone.length > 30 || organization.length > 120) {
+    return res.status(400).json({ ok: false, message: "One or more fields are too long." });
+  }
+
+  if (!allowedInquiryTypes.includes(inquiryType)) {
+    return res.status(400).json({ ok: false, message: "Please choose a valid inquiry type." });
+  }
+
+  if (message.length < 10 || message.length > 3000) {
+    return res.status(400).json({ ok: false, message: "Please enter a message between 10 and 3000 characters." });
+  }
+
+  if (!process.env.MONGODB_URI) {
+    return res.status(503).json({ ok: false, message: "Contact submissions are not configured yet." });
+  }
+
+  try {
+    await connectDatabase();
+    await ContactInquiry.create({ name, email, phone, organization, inquiryType, message });
+    return res.status(201).json({ ok: true, message: "Your inquiry has been received." });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ ok: false, message: "We could not submit your inquiry right now." });
+  }
 });
 
 app.use("/api", (_req, res) => {

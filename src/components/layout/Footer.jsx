@@ -26,8 +26,14 @@ function Footer() {
         <div className="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-[1.35fr_.75fr_.75fr_.75fr]">
           <div>
             <Link to="/" className="group flex w-fit items-center gap-4">
-              <div className="grid h-24 w-28 place-items-center overflow-hidden rounded-sm bg-white p-2">
-                <img src={rbCorpLogo} alt="Royalties Beauty Corp" loading="lazy" decoding="async" className="h-full w-full object-contain transition duration-300 group-hover:scale-[1.04]" />
+              <div className="h-24 w-28 overflow-hidden">
+                <img
+                  src={rbCorpLogo}
+                  alt="Royalties Beauty Corp"
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-contain mix-blend-screen transition duration-300 group-hover:scale-[1.04]"
+                />
               </div>
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] transition group-hover:text-[#ff6b6e]">Royalties Beauty Corp</p>

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -21,51 +21,57 @@ function AdminMessagesPage() {
   const [loading, setLoading] = useState(true);
   const [notice, setNotice] = useState({ type: "", message: "" });
 
-  const loadMessages = async (nextStatus = statusFilter, nextSearch = search) => {
+  const loadMessages = useCallback(async (nextStatus, nextSearch) => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
       if (nextStatus !== "all") params.set("status", nextStatus);
       if (nextSearch.trim()) params.set("search", nextSearch.trim());
+
       const response = await fetch(`/api/admin/contact-inquiries?${params.toString()}`, { credentials: "include" });
       if (response.status === 401) {
         setAuthState("unauthenticated");
         return;
       }
+
       const data = await response.json();
       if (!response.ok || !data.ok) throw new Error(data.message || "Unable to load inquiries.");
+
       setItems(data.items || []);
       setNewCount(Number(data.newCount || 0));
       setAuthState("authenticated");
-      if (selected) {
-        const fresh = (data.items || []).find((item) => item._id === selected._id);
-        if (fresh) setSelected(fresh);
-      }
     } catch (error) {
       setNotice({ type: "error", message: error.message || "Unable to load inquiries." });
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
+    let active = true;
+
     fetch("/api/admin/me", { credentials: "include" })
       .then((response) => {
         if (!response.ok) throw new Error();
-        setAuthState("authenticated");
-        return loadMessages();
+        if (active) setAuthState("authenticated");
       })
       .catch(() => {
-        setAuthState("unauthenticated");
-        setLoading(false);
+        if (active) {
+          setAuthState("unauthenticated");
+          setLoading(false);
+        }
       });
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {
     if (authState !== "authenticated") return undefined;
     const timer = setTimeout(() => loadMessages(statusFilter, search), 250);
     return () => clearTimeout(timer);
-  }, [statusFilter, search]);
+  }, [authState, loadMessages, search, statusFilter]);
 
   const counts = useMemo(() => ({
     all: items.length,
@@ -74,7 +80,10 @@ function AdminMessagesPage() {
     replied: items.filter((item) => item.status === "replied").length,
   }), [items]);
 
-  if (authState === "checking") return <main className="grid min-h-screen place-items-center bg-[#0b0b0c] text-white"><div className="text-center"><div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-[#ff4d50]"/><p className="mt-4 text-[10px] font-bold uppercase tracking-[.24em] text-white/45">Loading admin</p></div></main>;
+  if (authState === "checking") {
+    return <main className="grid min-h-screen place-items-center bg-[#0b0b0c] text-white"><div className="text-center"><div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-[#ff4d50]"/><p className="mt-4 text-[10px] font-bold uppercase tracking-[.24em] text-white/45">Loading admin</p></div></main>;
+  }
+
   if (authState === "unauthenticated") return <Navigate to="/admin/login" replace />;
 
   const setStatus = async (item, status) => {
@@ -89,7 +98,7 @@ function AdminMessagesPage() {
       if (!response.ok || !data.ok) throw new Error(data.message || "Unable to update inquiry.");
       setSelected(data.item);
       setNotice({ type: "success", message: `Marked as ${status}.` });
-      await loadMessages();
+      await loadMessages(statusFilter, search);
     } catch (error) {
       setNotice({ type: "error", message: error.message || "Unable to update inquiry." });
     }
@@ -104,7 +113,7 @@ function AdminMessagesPage() {
       setDeleteTarget(null);
       if (selected?._id === deleteTarget._id) setSelected(null);
       setNotice({ type: "success", message: "Inquiry deleted." });
-      await loadMessages();
+      await loadMessages(statusFilter, search);
     } catch (error) {
       setNotice({ type: "error", message: error.message || "Unable to delete inquiry." });
     }

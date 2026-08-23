@@ -18,6 +18,7 @@
     "cors": "latest",
     "dotenv": "latest",
     "express": "latest",
+    "express-rate-limit": "latest",
     "helmet": "latest",
     "mongoose": "latest",
     "motion": "^13.1.1",

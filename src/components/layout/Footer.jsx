@@ -12,7 +12,7 @@ const rbCorpLogo = "https://raw.githubusercontent.com/Shahzadkhanks19/rbcorp-rea
 
 function Footer() {
   return (
-    <footer className="bg-[#04142b] text-white">
+    <footer className="bg-[#0b0b0c] text-white">
       <div className="mx-auto max-w-[1680px] px-5 py-16 sm:px-8 lg:px-12 xl:px-16 lg:py-20">
         <div className="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-[1.35fr_.75fr_.75fr_.75fr]">
           <div>
@@ -20,7 +20,7 @@ function Footer() {
               <img src={rbCorpLogo} alt="RB Corp" className="h-24 w-28 object-contain" />
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em]">Royalties Beauty Corp</p>
-                <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.22em] text-[#d5aa59]">Diversified enterprise group</p>
+                <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.22em] text-[#ff6b6e]">Diversified enterprise group</p>
               </div>
             </div>
             <p className="mt-7 max-w-xl text-sm leading-7 text-white/52">
@@ -29,28 +29,28 @@ function Footer() {
           </div>
 
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#d5aa59]">Businesses</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a86a]">Businesses</p>
             <div className="mt-5 grid gap-3 text-sm text-white/58">
-              {companies.map(([label, to]) => <Link key={to} to={to} className="transition hover:text-white">{label}</Link>)}
+              {companies.map(([label, to]) => <Link key={to} to={to} className="transition hover:text-[#ff6b6e]">{label}</Link>)}
             </div>
           </div>
 
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#d5aa59]">Corporate</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a86a]">Corporate</p>
             <div className="mt-5 grid gap-3 text-sm text-white/58">
-              <Link to="/about" className="transition hover:text-white">About RB Corp</Link>
-              <Link to="/impact" className="transition hover:text-white">Impact</Link>
-              <Link to="/insights" className="transition hover:text-white">Insights</Link>
-              <Link to="/careers" className="transition hover:text-white">Careers</Link>
+              <Link to="/about" className="transition hover:text-[#ff6b6e]">About RB Corp</Link>
+              <Link to="/impact" className="transition hover:text-[#ff6b6e]">Impact</Link>
+              <Link to="/insights" className="transition hover:text-[#ff6b6e]">Insights</Link>
+              <Link to="/careers" className="transition hover:text-[#ff6b6e]">Careers</Link>
             </div>
           </div>
 
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#d5aa59]">Connect</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a86a]">Connect</p>
             <div className="mt-5 grid gap-3 text-sm text-white/58">
-              <Link to="/contact" className="transition hover:text-white">Contact us</Link>
-              <Link to="/companies" className="transition hover:text-white">Our businesses</Link>
-              <Link to="/" className="transition hover:text-white">Home</Link>
+              <Link to="/contact" className="transition hover:text-[#ff6b6e]">Contact us</Link>
+              <Link to="/companies" className="transition hover:text-[#ff6b6e]">Our businesses</Link>
+              <Link to="/" className="transition hover:text-[#ff6b6e]">Home</Link>
             </div>
           </div>
         </div>

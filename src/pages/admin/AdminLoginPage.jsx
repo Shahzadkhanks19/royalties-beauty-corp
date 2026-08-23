@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -10,12 +10,22 @@ function AdminLoginPage() {
   const [checking, setChecking] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
 
-  useState(() => {
+  useEffect(() => {
+    let active = true;
     fetch("/api/admin/me", { credentials: "include" })
-      .then((response) => setAuthenticated(response.ok))
-      .catch(() => setAuthenticated(false))
-      .finally(() => setChecking(false));
-  });
+      .then((response) => {
+        if (active) setAuthenticated(response.ok);
+      })
+      .catch(() => {
+        if (active) setAuthenticated(false);
+      })
+      .finally(() => {
+        if (active) setChecking(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   if (checking) {
     return <main className="grid min-h-screen place-items-center bg-[#0b0b0c] text-white"><div className="text-center"><div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-[#ff4d50]"/><p className="mt-4 text-[10px] font-bold uppercase tracking-[.24em] text-white/45">Checking session</p></div></main>;

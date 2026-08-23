@@ -4,6 +4,7 @@ import AboutPage from "./pages/AboutPage";
 import BeyonistPage from "./pages/BeyonistPage";
 import BusinessesPage from "./pages/BusinessesPage";
 import HomePage from "./pages/HomePage";
+import ImpactPage from "./pages/ImpactPage";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import RBCharityFoundationPage from "./pages/RBCharityFoundationPage";
 import RBFinancePage from "./pages/RBFinancePage";
@@ -22,7 +23,7 @@ function App() {
         <Route path="companies/rb-finance" element={<RBFinancePage />} />
         <Route path="companies/royalties-charity" element={<RBCharityFoundationPage />} />
         <Route path="companies/royalties-buffet" element={<RoyaltiesBuffetPage />} />
-        <Route path="impact" element={<PlaceholderPage title="Impact" />} />
+        <Route path="impact" element={<ImpactPage />} />
         <Route path="insights" element={<PlaceholderPage title="Insights" />} />
         <Route path="contact" element={<PlaceholderPage title="Contact" />} />
       </Route>

@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+/* The legacy CEO artwork already contains its own typography and identity.
+   Present it as artwork instead of covering it with a second text treatment. */
+div:has(> img[alt="RB Corp leadership"]) {
+  min-height: 0 !important;
+  aspect-ratio: 1 / 1;
+  background: #151517;
+}
+
+div:has(> img[alt="RB Corp leadership"]) > img[alt="RB Corp leadership"] {
+  object-fit: contain !important;
+  object-position: center !important;
+  opacity: 1 !important;
+}
+
+div:has(> img[alt="RB Corp leadership"]) > div {
+  display: none;
+}

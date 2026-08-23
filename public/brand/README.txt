@@ -1,1 +1,0 @@
-RB Corp brand assets are stored locally in this directory.

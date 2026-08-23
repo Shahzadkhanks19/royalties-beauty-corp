@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import SiteLayout from "./components/layout/SiteLayout";
+import PageSkeleton from "./components/system/PageSkeleton";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
@@ -16,27 +17,14 @@ const ContactPage = lazy(() => import("./pages/ContactPage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
 const DisclaimerPage = lazy(() => import("./pages/DisclaimerPage"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const AdminLoginPage = lazy(() => import("./pages/admin/AdminLoginPage"));
 const AdminMessagesPage = lazy(() => import("./pages/admin/AdminMessagesPage"));
 
-function PageLoader() {
-  return (
-    <div className="flex min-h-[55vh] items-center justify-center bg-[#f7f4f0] px-5" role="status" aria-live="polite">
-      <div className="flex flex-col items-center gap-5">
-        <div className="relative h-11 w-11">
-          <span className="absolute inset-0 rounded-full border border-black/10" />
-          <span className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-[#ff4d50]" />
-        </div>
-        <p className="text-[10px] font-bold uppercase tracking-[.24em] text-[#6f696b]">Loading RB Corp</p>
-      </div>
-    </div>
-  );
-}
-
 function App() {
   return (
-    <Suspense fallback={<PageLoader />}>
+    <Suspense fallback={<PageSkeleton />}>
       <Routes>
         <Route element={<SiteLayout />}>
           <Route index element={<HomePage />} />
@@ -53,6 +41,7 @@ function App() {
           <Route path="privacy" element={<PrivacyPage />} />
           <Route path="terms" element={<TermsPage />} />
           <Route path="disclaimer" element={<DisclaimerPage />} />
+          <Route path="error" element={<ErrorPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
         <Route path="admin/login" element={<AdminLoginPage />} />

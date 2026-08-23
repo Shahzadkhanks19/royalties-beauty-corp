@@ -8,7 +8,7 @@ const companies = [
   ["Royalties Buffet", "/companies/royalties-buffet"],
 ];
 
-const rbCorpLogo = "https://raw.githubusercontent.com/Shahzadkhanks19/rbcorp-react/main/public/android-chrome-512x512.png";
+const rbCorpLogo = "/brand/rb-corp-red.svg";
 
 function FooterLink({ to, children }) {
   return (
@@ -26,7 +26,7 @@ function Footer() {
         <div className="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-[1.35fr_.75fr_.75fr_.75fr]">
           <div>
             <Link to="/" className="group flex w-fit items-center gap-4">
-              <img src={rbCorpLogo} alt="RB Corp" className="h-24 w-28 object-contain transition duration-300 group-hover:scale-[1.04]" />
+              <img src={rbCorpLogo} alt="Royalties Beauty Corp" loading="lazy" decoding="async" className="h-24 w-28 object-contain transition duration-300 group-hover:scale-[1.04]" />
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] transition group-hover:text-[#ff6b6e]">Royalties Beauty Corp</p>
                 <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.22em] text-[#ff6b6e]">Diversified enterprise group</p>

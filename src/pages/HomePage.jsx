@@ -29,21 +29,32 @@ function HomePage() {
   return (
     <main className="overflow-hidden bg-[#f7f4f0] text-[#151517]">
       <section className="relative isolate overflow-hidden bg-[#0b0b0c] text-white">
-        <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_82%_18%,rgba(255,77,80,.18),transparent_28%),radial-gradient(circle_at_70%_72%,rgba(201,168,106,.10),transparent_32%)]" />
-        <div className="absolute -right-28 top-16 -z-10 size-[520px] rounded-full border border-[#ff4d50]/20" />
-        <div className="absolute -right-4 top-40 -z-10 size-[360px] rounded-full border border-white/7" />
-        <div className="absolute right-[12%] top-0 -z-10 h-full w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
-        <div className="mx-auto grid min-h-[720px] max-w-[1680px] items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1.06fr_.94fr] lg:px-12 xl:px-16">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }}>
+        <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_80%_12%,rgba(255,77,80,.16),transparent_28%),radial-gradient(circle_at_68%_76%,rgba(201,168,106,.08),transparent_30%)]" />
+        <div className="absolute -left-44 bottom-[-22rem] -z-10 size-[680px] rounded-full border border-[#ff4d50]/10" />
+
+        <div className="mx-auto grid min-h-[760px] max-w-[1680px] items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[.96fr_1.04fr] lg:px-12 lg:py-20 xl:px-16">
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} className="relative z-10">
             <p className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#ff6b6e]"><span className="h-px w-9 bg-[#ff4d50]" />Diversified enterprise group</p>
-            <h1 className="mt-7 max-w-4xl font-serif text-[clamp(3.5rem,6.6vw,7.2rem)] leading-[0.96] tracking-[-0.05em]">Building <span className="text-[#ff5b5e]">enduring value.</span><span className="block">Creating a better tomorrow.</span></h1>
+            <h1 className="mt-7 max-w-4xl font-serif text-[clamp(3.4rem,6vw,6.8rem)] leading-[0.96] tracking-[-0.05em]">Building <span className="text-[#ff5b5e]">enduring value.</span><span className="block">Creating a better tomorrow.</span></h1>
             <p className="mt-7 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">Royalties Beauty Corp is a diversified business group building purposeful companies across beauty, services, finance, hospitality and social impact.</p>
-            <div className="mt-9 flex flex-wrap gap-3"><Link to="/companies" className="inline-flex items-center gap-3 rounded-md bg-[#ff4d50] px-6 py-3.5 text-sm font-bold uppercase tracking-[0.06em] text-white transition hover:bg-[#e83c40]">Explore our businesses <span>→</span></Link><Link to="/about" className="inline-flex items-center rounded-md border border-white/20 bg-white/[0.04] px-6 py-3.5 text-sm font-bold uppercase tracking-[0.06em] text-white transition hover:bg-white/10">About RB Corp</Link></div>
+            <div className="mt-9 flex flex-wrap gap-3"><Link to="/companies" className="inline-flex items-center gap-3 rounded-md bg-[#ff4d50] px-6 py-3.5 text-sm font-bold uppercase tracking-[0.06em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#e83c40]">Explore our businesses <span>→</span></Link><Link to="/about" className="inline-flex items-center rounded-md border border-white/20 bg-white/[0.04] px-6 py-3.5 text-sm font-bold uppercase tracking-[0.06em] text-white transition duration-300 hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/10">About RB Corp</Link></div>
           </motion.div>
-          <motion.aside initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.08 }} className="border border-white/12 bg-[#151517]/88 p-7 shadow-2xl shadow-black/30 sm:p-9 lg:justify-self-end lg:max-w-[650px]">
-            <p className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#c9a86a]"><span className="h-px w-8 bg-[#c9a86a]" />Our purpose</p><h2 className="mt-5 font-serif text-4xl leading-tight sm:text-5xl">Trust. Enterprise. Impact.</h2><p className="mt-5 max-w-xl text-sm leading-7 text-white/62 sm:text-base">We build and grow responsible businesses that create long-term value while contributing positively to customers, partners and communities.</p>
-            <div className="mt-8 grid gap-6 border-t border-white/10 pt-7 sm:grid-cols-3">{values.map(([title, text], index) => <div key={title}><span className="text-xs font-bold text-[#ff5b5e]">0{index + 1}</span><h3 className="mt-3 font-serif text-xl">{title}</h3><p className="mt-2 text-xs leading-6 text-white/50">{text}</p></div>)}</div>
-          </motion.aside>
+
+          <motion.div initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.75, delay: 0.08 }} className="relative lg:pl-4">
+            <div className="grid min-h-[540px] grid-cols-2 grid-rows-[1.35fr_.85fr] gap-2 overflow-hidden border border-white/10 bg-[#151517] p-2 shadow-2xl shadow-black/35 sm:min-h-[620px] sm:grid-cols-6">
+              <Link to={companies[0].href} className="group relative col-span-1 overflow-hidden sm:col-span-4"><img src={companies[0].artwork} alt="Beyonist, an RB Corp business" className="h-full w-full object-cover opacity-78 transition duration-700 group-hover:scale-[1.04] group-hover:opacity-95" /><div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" /><span className="absolute bottom-4 left-4 text-[10px] font-bold uppercase tracking-[0.18em] text-white/80">Beauty & skincare</span></Link>
+              <Link to={companies[1].href} className="group relative col-span-1 overflow-hidden sm:col-span-2"><img src={companies[1].artwork} alt="RB Service Connect, an RB Corp business" className="h-full w-full object-cover opacity-74 transition duration-700 group-hover:scale-[1.04] group-hover:opacity-95" /><div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/10" /><span className="absolute bottom-4 left-4 text-[10px] font-bold uppercase tracking-[0.18em] text-white/80">Services</span></Link>
+              {companies.slice(2).map((company) => <Link key={company.name} to={company.href} className="group relative col-span-1 overflow-hidden sm:col-span-2"><img src={company.artwork} alt={`${company.name}, an RB Corp business`} className="h-full w-full object-cover opacity-72 transition duration-700 group-hover:scale-[1.05] group-hover:opacity-95" /><div className="absolute inset-0 bg-gradient-to-t from-black/72 via-transparent to-transparent" /><span className="absolute bottom-3 left-3 text-[9px] font-bold uppercase tracking-[0.16em] text-white/80">{company.sector}</span></Link>)}
+            </div>
+
+            <div className="relative -mt-20 ml-4 border border-white/12 bg-[#0b0b0c]/95 p-5 shadow-2xl backdrop-blur-md sm:ml-10 sm:max-w-[560px] sm:p-6 lg:ml-[-3rem]">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+                <div><p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#c9a86a]">Our purpose</p><h2 className="mt-2 font-serif text-2xl sm:text-3xl">Trust. Enterprise. Impact.</h2></div>
+                <Link to="/about" className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#ff6b6e] transition hover:text-white">Discover RB Corp →</Link>
+              </div>
+              <div className="mt-5 grid grid-cols-3 border-t border-white/10 pt-4">{values.map(([title], index) => <div key={title} className={index ? "border-l border-white/10 pl-4" : "pr-4"}><span className="text-[9px] font-bold text-[#ff5b5e]">0{index + 1}</span><p className="mt-1 font-serif text-sm sm:text-base">{title}</p></div>)}</div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

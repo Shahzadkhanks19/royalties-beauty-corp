@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+const siteUrl = "https://royaltiesbeautycorp.vercel.app";
 const baseTitle = "Royalties Beauty Corp";
 const defaultDescription = "Royalties Beauty Corp is a diversified group building responsible businesses across beauty, services, finance, hospitality and social impact.";
+const socialImage = `${siteUrl}/rb-corp-logo.png`;
 
 const routeMeta = {
   "/": [baseTitle, defaultDescription],
@@ -35,23 +37,39 @@ function upsertMeta(name, content, property = false) {
   node.setAttribute("content", content);
 }
 
+function upsertCanonical(href) {
+  let node = document.head.querySelector('link[rel="canonical"]');
+  if (!node) {
+    node = document.createElement("link");
+    node.setAttribute("rel", "canonical");
+    document.head.appendChild(node);
+  }
+  node.setAttribute("href", href);
+}
+
 function RouteSeo() {
   const { pathname } = useLocation();
 
   useEffect(() => {
     const isAdmin = pathname.startsWith("/admin");
+    const isIndexable = Boolean(routeMeta[pathname]) && !isAdmin && pathname !== "/error";
     const [title, description] = routeMeta[pathname] || ["Page Not Found | Royalties Beauty Corp", "The requested Royalties Beauty Corp page could not be found."];
+    const canonicalUrl = `${siteUrl}${pathname === "/" ? "/" : pathname}`;
 
     document.title = title;
     upsertMeta("description", description);
-    upsertMeta("robots", isAdmin || !routeMeta[pathname] ? "noindex,nofollow" : "index,follow,max-image-preview:large");
+    upsertMeta("robots", isIndexable ? "index,follow,max-image-preview:large" : "noindex,nofollow");
     upsertMeta("og:title", title, true);
     upsertMeta("og:description", description, true);
     upsertMeta("og:type", "website", true);
     upsertMeta("og:site_name", baseTitle, true);
+    upsertMeta("og:url", canonicalUrl, true);
+    upsertMeta("og:image", socialImage, true);
     upsertMeta("twitter:card", "summary_large_image");
     upsertMeta("twitter:title", title);
     upsertMeta("twitter:description", description);
+    upsertMeta("twitter:image", socialImage);
+    upsertCanonical(canonicalUrl);
   }, [pathname]);
 
   return null;

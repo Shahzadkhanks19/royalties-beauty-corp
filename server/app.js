@@ -26,6 +26,33 @@ const loginLimiter = rateLimit({
   message: { ok: false, message: "Too many sign-in attempts. Please try again later." },
 });
 
+function isAllowedOrigin(origin) {
+  if (!origin || process.env.NODE_ENV !== "production") return true;
+
+  const explicitOrigins = [
+    process.env.CLIENT_ORIGIN,
+    "https://royaltiesbeautycorp.vercel.app",
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
+  ].filter(Boolean);
+
+  if (explicitOrigins.includes(origin)) return true;
+
+  try {
+    const { protocol, hostname } = new URL(origin);
+    if (protocol !== "https:") return false;
+
+    // Allow only this project's Vercel preview/branch aliases, not arbitrary Vercel apps.
+    return (
+      hostname.endsWith(".vercel.app") &&
+      (hostname.startsWith("royalties-beauty-corp-") ||
+        hostname.startsWith("royalties-beauty-corp-git-") ||
+        hostname === "royaltiesbeautycorp.vercel.app")
+    );
+  } catch {
+    return false;
+  }
+}
+
 app.disable("x-powered-by");
 app.set("trust proxy", 1);
 app.use(helmet());
@@ -33,12 +60,7 @@ app.use(compression());
 app.use(
   cors({
     origin(origin, callback) {
-      const allowedOrigins = [
-        process.env.CLIENT_ORIGIN,
-        process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
-      ].filter(Boolean);
-
-      if (!origin || process.env.NODE_ENV !== "production" || allowedOrigins.includes(origin)) {
+      if (isAllowedOrigin(origin)) {
         callback(null, true);
         return;
       }

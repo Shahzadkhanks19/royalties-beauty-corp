@@ -13,6 +13,10 @@ const RoyaltiesBuffetPage = lazy(() => import("./pages/RoyaltiesBuffetPage"));
 const ImpactPage = lazy(() => import("./pages/ImpactPage"));
 const InsightsPage = lazy(() => import("./pages/InsightsPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const TermsPage = lazy(() => import("./pages/TermsPage"));
+const DisclaimerPage = lazy(() => import("./pages/DisclaimerPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const AdminLoginPage = lazy(() => import("./pages/admin/AdminLoginPage"));
 const AdminMessagesPage = lazy(() => import("./pages/admin/AdminMessagesPage"));
 
@@ -46,12 +50,15 @@ function App() {
           <Route path="impact" element={<ImpactPage />} />
           <Route path="insights" element={<InsightsPage />} />
           <Route path="contact" element={<ContactPage />} />
+          <Route path="privacy" element={<PrivacyPage />} />
+          <Route path="terms" element={<TermsPage />} />
+          <Route path="disclaimer" element={<DisclaimerPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
         <Route path="admin/login" element={<AdminLoginPage />} />
         <Route path="admin/messages" element={<AdminMessagesPage />} />
         <Route path="admin" element={<Navigate to="/admin/messages" replace />} />
         <Route path="careers" element={<Navigate to="/companies/rb-service-connect" replace />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
   );

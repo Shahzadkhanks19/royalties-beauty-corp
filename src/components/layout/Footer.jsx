@@ -10,47 +10,52 @@ const companies = [
 
 const rbCorpLogo = "https://raw.githubusercontent.com/Shahzadkhanks19/rbcorp-react/main/public/android-chrome-512x512.png";
 
+function FooterLink({ to, children }) {
+  return (
+    <Link to={to} className="group inline-flex w-fit items-center gap-2 transition duration-300 hover:translate-x-1 hover:text-[#ff6b6e]">
+      <span className="h-px w-0 bg-[#ff4d50] transition-all duration-300 group-hover:w-4" />
+      {children}
+    </Link>
+  );
+}
+
 function Footer() {
   return (
     <footer className="bg-[#0b0b0c] text-white">
       <div className="mx-auto max-w-[1680px] px-5 py-16 sm:px-8 lg:px-12 xl:px-16 lg:py-20">
         <div className="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-[1.35fr_.75fr_.75fr_.75fr]">
           <div>
-            <div className="flex items-center gap-4">
-              <img src={rbCorpLogo} alt="RB Corp" className="h-24 w-28 object-contain" />
+            <Link to="/" className="group flex w-fit items-center gap-4">
+              <img src={rbCorpLogo} alt="RB Corp" className="h-24 w-28 object-contain transition duration-300 group-hover:scale-[1.04]" />
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em]">Royalties Beauty Corp</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] transition group-hover:text-[#ff6b6e]">Royalties Beauty Corp</p>
                 <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.22em] text-[#ff6b6e]">Diversified enterprise group</p>
               </div>
-            </div>
-            <p className="mt-7 max-w-xl text-sm leading-7 text-white/52">
-              Building and growing responsible businesses across beauty, services, finance, hospitality and social impact with a long-term commitment to trust, quality and sustainable value.
-            </p>
+            </Link>
+            <p className="mt-7 max-w-xl text-sm leading-7 text-white/52">Building and growing responsible businesses across beauty, services, finance, hospitality and social impact with a long-term commitment to trust, quality and sustainable value.</p>
           </div>
 
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a86a]">Businesses</p>
-            <div className="mt-5 grid gap-3 text-sm text-white/58">
-              {companies.map(([label, to]) => <Link key={to} to={to} className="transition hover:text-[#ff6b6e]">{label}</Link>)}
-            </div>
+            <div className="mt-5 grid gap-3 text-sm text-white/58">{companies.map(([label, to]) => <FooterLink key={to} to={to}>{label}</FooterLink>)}</div>
           </div>
 
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a86a]">Corporate</p>
             <div className="mt-5 grid gap-3 text-sm text-white/58">
-              <Link to="/about" className="transition hover:text-[#ff6b6e]">About RB Corp</Link>
-              <Link to="/impact" className="transition hover:text-[#ff6b6e]">Impact</Link>
-              <Link to="/insights" className="transition hover:text-[#ff6b6e]">Insights</Link>
-              <Link to="/careers" className="transition hover:text-[#ff6b6e]">Careers</Link>
+              <FooterLink to="/about">About RB Corp</FooterLink>
+              <FooterLink to="/impact">Impact</FooterLink>
+              <FooterLink to="/insights">Insights</FooterLink>
             </div>
           </div>
 
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#c9a86a]">Connect</p>
             <div className="mt-5 grid gap-3 text-sm text-white/58">
-              <Link to="/contact" className="transition hover:text-[#ff6b6e]">Contact us</Link>
-              <Link to="/companies" className="transition hover:text-[#ff6b6e]">Our businesses</Link>
-              <Link to="/" className="transition hover:text-[#ff6b6e]">Home</Link>
+              <FooterLink to="/contact">Contact us</FooterLink>
+              <FooterLink to="/companies">Our businesses</FooterLink>
+              <FooterLink to="/companies/rb-service-connect">Jobs via RB Service Connect</FooterLink>
+              <FooterLink to="/">Home</FooterLink>
             </div>
           </div>
         </div>

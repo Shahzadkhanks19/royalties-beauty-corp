@@ -5,14 +5,15 @@ function ScrollToTopButton() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 420);
+    const onScroll = () => setVisible(document.documentElement.scrollTop > 420 || document.body.scrollTop > 420);
     onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    document.addEventListener("scroll", onScroll, { passive: true });
+    return () => document.removeEventListener("scroll", onScroll);
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   };
 
   return (

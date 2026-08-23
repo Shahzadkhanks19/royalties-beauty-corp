@@ -2,13 +2,15 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
 const legacyBase = "https://raw.githubusercontent.com/Shahzadkhanks19/rbcorp-react/main";
+const beyonistLogo = "https://raw.githubusercontent.com/Shahzadkhanks19/beyonist-mern/main/client/public/brand/beyonist-wordmark-black.webp";
+const charityLogo = "https://media.githubusercontent.com/media/Shahzadkhanks19/rbserviceconnect/main/images/Charity-Logo-sample-1%20(1).png";
 
 const companies = [
   {
     name: "Beyonist",
     sector: "Beauty & Skincare",
     href: "/companies/beyonist",
-    logo: `${legacyBase}/src/Pages/About/Images/beyonist%20logo%20file.jpg`,
+    logo: beyonistLogo,
     artwork: `${legacyBase}/src/Pages/Home/Images/beyonist-acc.webp`,
     statement: "Premium skincare and beauty experiences shaped around confidence, care and holistic wellbeing.",
     accent: "bg-rose-500",
@@ -35,7 +37,7 @@ const companies = [
     name: "Royalties Charity",
     sector: "Social Impact",
     href: "/companies/royalties-charity",
-    logo: `${legacyBase}/src/Pages/About/Images/charity%20logo%20file.jpg`,
+    logo: charityLogo,
     artwork: `${legacyBase}/src/Pages/Home/Images/charity-acc.webp`,
     statement: "Community-led initiatives focused on food support, essential assistance and practical care.",
     accent: "bg-amber-400",

@@ -11,7 +11,7 @@ const links = [
   ["Careers", "/careers"],
 ];
 
-const rbCorpLogo = "https://raw.githubusercontent.com/Shahzadkhanks19/rbcorp-react/main/src/Components/Navbar/Images/Rb%20corp%20for%20coding%20(3).png";
+const rbCorpLogo = "https://raw.githubusercontent.com/Shahzadkhanks19/rbcorp-react/main/public/android-chrome-512x512.png";
 
 function Navbar() {
   const [open, setOpen] = useState(false);

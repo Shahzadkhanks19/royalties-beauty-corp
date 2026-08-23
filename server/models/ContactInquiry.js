@@ -12,7 +12,7 @@ const contactInquirySchema = new mongoose.Schema(
       enum: ["Group inquiry", "Partnership", "Media & insights", "Business opportunity", "Other"],
     },
     message: { type: String, required: true, trim: true, maxlength: 3000 },
-    status: { type: String, enum: ["new", "reviewed", "closed"], default: "new" },
+    status: { type: String, enum: ["new", "read", "replied"], default: "new" },
   },
   { timestamps: true },
 );

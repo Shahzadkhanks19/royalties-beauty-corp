@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
 const beyonistBase = "https://raw.githubusercontent.com/Shahzadkhanks19/beyonist-mern/main/client/public";
+const beyonistSite = "https://beyonist.vercel.app";
 
 const pillars = [
   ["01", "Confidence before complexity", "Focused formulas, clearer routines and a brand experience designed to feel approachable rather than overwhelming."],
@@ -27,7 +28,7 @@ function BeyonistPage() {
             <h1 className="mt-7 max-w-3xl font-serif text-[clamp(3.2rem,5.7vw,6.1rem)] leading-[.94] tracking-[-.05em]">Beauty that feels <span className="text-[#1a1a1a]">more like you.</span></h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-white/88 sm:text-lg">Beyonist is RB Corp’s beauty and skincare business, built around confidence, individuality and intentional care rather than one-size-fits-all beauty standards.</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="https://beyonist.com" target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 bg-[#151517] px-6 py-4 text-sm font-bold uppercase tracking-[.08em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-black hover:shadow-xl">Visit Beyonist <span className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span></a>
+              <a href={beyonistSite} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 bg-[#151517] px-6 py-4 text-sm font-bold uppercase tracking-[.08em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-black hover:shadow-xl">Visit Beyonist <span className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span></a>
               <Link to="/companies" className="inline-flex items-center border border-white/30 px-6 py-4 text-sm font-bold uppercase tracking-[.08em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-white/10">Back to portfolio</Link>
             </div>
           </motion.div>
@@ -64,7 +65,7 @@ function BeyonistPage() {
         </div>
       </section>
 
-      <section className="bg-[#fffdfa] py-16 lg:py-20"><div className="mx-auto grid max-w-[1680px] gap-10 px-5 sm:px-8 lg:grid-cols-[1.15fr_.85fr] lg:items-end lg:px-12 xl:px-16"><div><p className="text-[10px] font-bold uppercase tracking-[.24em] text-[#b9252d]">Within RB Corp</p><h2 className="mt-4 max-w-4xl font-serif text-4xl leading-tight sm:text-5xl lg:text-[3.5rem]">A distinctive brand. A shared standard for long-term growth.</h2><p className="mt-5 max-w-3xl text-base leading-8 text-[#656163]">Beyonist retains its own personality, customer voice and product language while operating as part of a broader group built around disciplined execution and responsible enterprise.</p></div><div className="flex flex-col gap-3"><a href="https://beyonist.com" target="_blank" rel="noreferrer" className="group inline-flex items-center justify-between bg-[#d13c3c] px-6 py-5 text-sm font-bold uppercase tracking-[.08em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#b9252d] hover:shadow-lg">Explore Beyonist <span className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span></a><Link to="/companies" className="group inline-flex items-center justify-between border border-black/15 px-6 py-5 text-sm font-bold uppercase tracking-[.08em] transition duration-300 hover:-translate-y-0.5 hover:bg-[#151517] hover:text-white">View all businesses <span className="transition-transform group-hover:translate-x-1">→</span></Link></div></div></section>
+      <section className="bg-[#fffdfa] py-16 lg:py-20"><div className="mx-auto grid max-w-[1680px] gap-10 px-5 sm:px-8 lg:grid-cols-[1.15fr_.85fr] lg:items-end lg:px-12 xl:px-16"><div><p className="text-[10px] font-bold uppercase tracking-[.24em] text-[#b9252d]">Within RB Corp</p><h2 className="mt-4 max-w-4xl font-serif text-4xl leading-tight sm:text-5xl lg:text-[3.5rem]">A distinctive brand. A shared standard for long-term growth.</h2><p className="mt-5 max-w-3xl text-base leading-8 text-[#656163]">Beyonist retains its own personality, customer voice and product language while operating as part of a broader group built around disciplined execution and responsible enterprise.</p></div><div className="flex flex-col gap-3"><a href={beyonistSite} target="_blank" rel="noreferrer" className="group inline-flex items-center justify-between bg-[#d13c3c] px-6 py-5 text-sm font-bold uppercase tracking-[.08em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#b9252d] hover:shadow-lg">Explore Beyonist <span className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span></a><Link to="/companies" className="group inline-flex items-center justify-between border border-black/15 px-6 py-5 text-sm font-bold uppercase tracking-[.08em] transition duration-300 hover:-translate-y-0.5 hover:bg-[#151517] hover:text-white">View all businesses <span className="transition-transform group-hover:translate-x-1">→</span></Link></div></div></section>
     </main>
   );
 }

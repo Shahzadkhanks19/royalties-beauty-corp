@@ -17,9 +17,9 @@ function App() {
         <Route path="companies/royalties-buffet" element={<PlaceholderPage title="Royalties Buffet" />} />
         <Route path="impact" element={<PlaceholderPage title="Impact" />} />
         <Route path="insights" element={<PlaceholderPage title="Insights" />} />
-        <Route path="careers" element={<PlaceholderPage title="Careers" />} />
         <Route path="contact" element={<PlaceholderPage title="Contact" />} />
       </Route>
+      <Route path="careers" element={<Navigate to="/companies/rb-service-connect" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

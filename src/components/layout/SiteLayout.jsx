@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import ScrollToTopButton from "../ui/ScrollToTopButton";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
@@ -10,6 +11,7 @@ function SiteLayout() {
         <Outlet />
       </main>
       <Footer />
+      <ScrollToTopButton />
     </div>
   );
 }

@@ -15,7 +15,7 @@ function Footer() {
         <div className="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-[1.35fr_.75fr_.75fr_.75fr]">
           <div>
             <div className="flex items-center gap-4">
-              <img src="/rb-corp-logo.svg" alt="RB Corp" className="h-20 w-28 rounded-sm bg-white p-2 object-contain" />
+              <img src="/rb-corp-logo.png" alt="RB Corp" className="h-20 w-28 rounded-sm bg-white p-2 object-contain" />
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em]">Royalties Beauty Corp</p>
                 <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.22em] text-[#d5aa59]">Diversified enterprise group</p>

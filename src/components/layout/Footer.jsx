@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+const rbCorpLogo = "https://raw.githubusercontent.com/Shahzadkhanks19/rbcorp-react/main/src/Components/Footer/Images/Rb%20corp%20for%20coding%20(3).png";
+
 const companies = [
   ["Beyonist", "/companies/beyonist"],
   ["RB Service Connect", "/companies/rb-service-connect"],
@@ -15,7 +17,9 @@ function Footer() {
         <div className="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-[1.35fr_.75fr_.75fr_.75fr]">
           <div>
             <div className="flex items-center gap-4">
-              <img src="/rb-corp-logo.png" alt="RB Corp" className="h-20 w-28 rounded-sm bg-white p-2 object-contain" />
+              <div className="grid h-20 w-28 place-items-center rounded-sm bg-white p-2">
+                <img src={rbCorpLogo} alt="RB Corp" className="max-h-16 max-w-full object-contain" />
+              </div>
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em]">Royalties Beauty Corp</p>
                 <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.22em] text-[#d5aa59]">Diversified enterprise group</p>

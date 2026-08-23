@@ -60,8 +60,13 @@ function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 pt-6 text-xs text-white/34 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-5 pt-6 text-xs text-white/34 lg:flex-row lg:items-center lg:justify-between">
           <p>© {new Date().getFullYear()} Royalties Beauty Corp. All rights reserved.</p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            <Link to="/privacy" className="transition hover:text-[#ff6b6e]">Privacy</Link>
+            <Link to="/terms" className="transition hover:text-[#ff6b6e]">Terms</Link>
+            <Link to="/disclaimer" className="transition hover:text-[#ff6b6e]">Disclaimer</Link>
+          </div>
           <p className="uppercase tracking-[0.18em]">Trust · Enterprise · Impact</p>
         </div>
       </div>

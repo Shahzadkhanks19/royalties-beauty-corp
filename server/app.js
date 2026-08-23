@@ -1,6 +1,7 @@
 import compression from "compression";
 import cors from "cors";
 import express from "express";
+import { rateLimit } from "express-rate-limit";
 import helmet from "helmet";
 import { connectDatabase } from "./config/db.js";
 import { clearSessionCookie, createSessionToken, credentialsAreValid, requireAdmin, sessionCookie } from "./lib/adminAuth.js";
@@ -8,7 +9,25 @@ import ContactInquiry from "./models/ContactInquiry.js";
 
 const app = express();
 
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 8,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: { ok: false, message: "Too many contact requests. Please try again later." },
+});
+
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 8,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  skipSuccessfulRequests: true,
+  message: { ok: false, message: "Too many sign-in attempts. Please try again later." },
+});
+
 app.disable("x-powered-by");
+app.set("trust proxy", 1);
 app.use(helmet());
 app.use(compression());
 app.use(
@@ -55,7 +74,7 @@ app.get("/api/health", async (_req, res) => {
   return res.status(200).json(response);
 });
 
-app.post("/api/contact", async (req, res) => {
+app.post("/api/contact", contactLimiter, async (req, res) => {
   const name = String(req.body?.name || "").trim();
   const email = String(req.body?.email || "").trim().toLowerCase();
   const phone = String(req.body?.phone || "").trim();
@@ -81,7 +100,7 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-app.post("/api/admin/login", (req, res) => {
+app.post("/api/admin/login", loginLimiter, (req, res) => {
   try {
     if (!credentialsAreValid(req.body?.email, req.body?.password)) {
       return res.status(401).json({ ok: false, message: "Invalid admin credentials." });

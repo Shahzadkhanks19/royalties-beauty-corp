@@ -3,10 +3,10 @@ import SiteLayout from "./components/layout/SiteLayout";
 import AboutPage from "./pages/AboutPage";
 import BeyonistPage from "./pages/BeyonistPage";
 import BusinessesPage from "./pages/BusinessesPage";
+import ContactPage from "./pages/ContactPage";
 import HomePage from "./pages/HomePage";
 import ImpactPage from "./pages/ImpactPage";
 import InsightsPage from "./pages/InsightsPage";
-import PlaceholderPage from "./pages/PlaceholderPage";
 import RBCharityFoundationPage from "./pages/RBCharityFoundationPage";
 import RBFinancePage from "./pages/RBFinancePage";
 import RBServiceConnectPage from "./pages/RBServiceConnectPage";
@@ -26,7 +26,7 @@ function App() {
         <Route path="companies/royalties-buffet" element={<RoyaltiesBuffetPage />} />
         <Route path="impact" element={<ImpactPage />} />
         <Route path="insights" element={<InsightsPage />} />
-        <Route path="contact" element={<PlaceholderPage title="Contact" />} />
+        <Route path="contact" element={<ContactPage />} />
       </Route>
       <Route path="careers" element={<Navigate to="/companies/rb-service-connect" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />

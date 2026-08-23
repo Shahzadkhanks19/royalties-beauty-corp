@@ -79,9 +79,9 @@ function AdminLoginPage() {
             <label className="block">
               <span className="mb-2 block text-[10px] font-bold uppercase tracking-[.15em] text-white/45">Password</span>
               <span className="relative block">
-                <input value={form.password} onChange={(e)=>setForm((current)=>({...current,password:e.target.value}))} className={`${inputClass} pr-28`} placeholder="Enter password" type={showPassword ? "text" : "password"} autoComplete="current-password" />
-                <button type="button" onClick={()=>setShowPassword((current)=>!current)} aria-pressed={showPassword} aria-label={showPassword ? "Hide password" : "Show password"} className="absolute inset-y-0 right-0 flex items-center gap-2 px-4 text-[10px] font-bold uppercase tracking-[.12em] text-white/55 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff4d50]">
-                  <span aria-hidden="true" className="text-sm leading-none">{showPassword ? "◉" : "◎"}</span>
+                <input value={form.password} onChange={(e)=>setForm((current)=>({...current,password:e.target.value}))} className={`${inputClass} pr-32`} placeholder="Enter password" type={showPassword ? "text" : "password"} autoComplete="current-password" />
+                <button type="button" onClick={()=>setShowPassword((current)=>!current)} aria-pressed={showPassword} aria-label={showPassword ? "Hide password" : "Show password"} className="absolute right-2 top-1/2 inline-flex -translate-y-1/2 items-center gap-2 rounded-sm border border-white/15 bg-[#0b0b0c] px-3 py-2 text-[10px] font-bold uppercase tracking-[.12em] text-white shadow-sm transition hover:border-[#ff4d50]/60 hover:bg-[#1d1d20] hover:text-[#ff7b7d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff4d50]">
+                  <span aria-hidden="true" className="text-sm leading-none text-[#ff6b6e]">{showPassword ? "◉" : "◎"}</span>
                   <span>{showPassword ? "Hide" : "Show"}</span>
                 </button>
               </span>
